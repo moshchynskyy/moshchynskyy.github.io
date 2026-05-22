@@ -74,36 +74,6 @@
   --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --color-bg: #191919;
-    --color-bg-soft: #252525;
-    --color-text: #e6e6e4;
-    --color-text-muted: #9b9a97;
-    --color-text-faint: #6b6a66;
-    --color-border: #2f2f2f;
-    --color-border-strong: #3f3f3f;
-    --color-link: #5eb1ef;
-    --color-link-hover: #87c5f3;
-    --color-accent: #e6e6e4;
-
-    --callout-blue-bg: #1d2e3a;
-    --callout-blue-fg: #c7e2f0;
-    --callout-green-bg: #1f2e1f;
-    --callout-green-fg: #c7e0c8;
-    --callout-yellow-bg: #332c1a;
-    --callout-yellow-fg: #ede1bc;
-    --callout-pink-bg: #2f1f2a;
-    --callout-pink-fg: #f0c7df;
-
-    --pill-bg: #1f3a1f;
-    --pill-fg: #b8d8b9;
-
-    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.5);
-  }
-}
-
 /* ----- Reset ------------------------------------------------------------- */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -177,13 +147,10 @@ hr { border: 0; }
   position: relative;
   margin: 0 -56px 0;
   height: 200px;
-  background: linear-gradient(135deg, #ffb3a7 0%, #ff6b6b 50%, #c92a2a 100%);
+  background: linear-gradient(135deg, #f5d0a9 0%, #f3b7d0 50%, #b8c8ec 100%);
 }
 
 [data-theme="dark"] .page-cover { opacity: 0.7; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .page-cover { opacity: 0.7; }
-}
 
 .page-emoji {
   font-size: 78px;
@@ -344,9 +311,6 @@ hr { border: 0; }
 }
 
 [data-theme="dark"] .callout-body .price { background: rgba(255, 255, 255, 0.08); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .callout-body .price { background: rgba(255, 255, 255, 0.08); }
-}
 
 /* ----- Gallery (portfolio) ----------------------------------------------- */
 
@@ -491,11 +455,6 @@ hr { border: 0; }
 
 [data-theme="dark"] .theme-toggle .icon-sun  { display: block; }
 [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .theme-toggle .icon-sun  { display: block; }
-  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
-}
 
 /* ----- Responsive -------------------------------------------------------- */
 

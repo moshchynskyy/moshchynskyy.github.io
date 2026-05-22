@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Anton Moshchynskyi — front-end developer from Kyiv, Ukraine. Portfolio, services and contact.">
   <meta name="author" content="Anton Moshchynskyi">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#191919" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#191919">
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') {
+        document.documentElement.setAttribute('data-theme', t);
+      }
+    } catch (e) {}
+  </script>
 
   <meta property="og:title" content="Anton Moshchynskyi — front-end developer">
   <meta property="og:description" content="Front-end developer from Kyiv. Websites, landing pages, e-commerce.">
