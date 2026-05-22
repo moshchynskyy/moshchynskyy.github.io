@@ -1,88 +1,37 @@
-(function(){
- "use strict";
- //nav
+(function () {
+  'use strict';
 
-// $('ul.navbar-nav li a').click(function(e) {
-	// e.preventDefault();
-	// $("#sidebar-wrapper").toggleClass("active");
-// });
-$('ul.navbar-nav').onePageNav({
-scrollSpeed: 1000,
-scrollThreshold: 0.25
-});
- $('a.about-more').click(function() {
-          if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') 
-            || location.hostname == this.hostname) {
+  var STORAGE_KEY = 'theme';
+  var root = document.documentElement;
 
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-            if (target.length) {
-              $('html,body').animate({
-                scrollTop: target.offset().top
-              }, 1000);
-              return false;
-            }
-          }
-        });
- //=========== jquery invew ====================
-$('.hidding').bind('inview', function(event, visible) {
-var effect = $(this).attr('data-animated');
-$(this).addClass(effect);
-$(this).addClass('visible');
-});
+  function applyTheme(theme) {
+    if (theme === 'light' || theme === 'dark') {
+      root.setAttribute('data-theme', theme);
+    } else {
+      root.removeAttribute('data-theme');
+    }
+  }
 
-$("body").backstretch("img/bg.jpg");
- //function
-  HeadHeight();
-folioHOver();
-navClick();
-valid();
+  function currentEffectiveTheme() {
+    var explicit = root.getAttribute('data-theme');
+    if (explicit) return explicit;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
+  try {
+    var saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) applyTheme(saved);
+  } catch (e) { /* ignore — storage may be unavailable */ }
+
+  var toggle = document.querySelector('[data-theme-toggle]');
+  if (toggle) {
+    toggle.addEventListener('click', function () {
+      var next = currentEffectiveTheme() === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (e) { /* ignore */ }
+    });
+  }
+
+  var yearEl = document.querySelector('[data-year]');
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 })();
-
-$(window).load(function(){
-
-	  navClick();
-});
-$(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
-    event.preventDefault();
-    $(this).ekkoLightbox();
-    }); 
-$(window).resize(function(){
-HeadHeight();
-navClick();
-});
-function HeadHeight(){
-var wHeight = $(window).height();
-$('header').css('height', wHeight);
-}
-function folioHOver(){
-var animIn = $('.onHover').attr('data-animatedin');
-var animOut = $('.onHover').attr('data-animatedout');
- $('.caption').fadeOut();
-$('.hcaption').hover(function(){
-
-	$(this).find('.myToggle').fadeIn();
-	$(this).find('.attr-icon').fadeIn();
-    $(this).find('.caption').removeClass(animOut).addClass(animIn);
-    //$(this).find('.right').removeClass('bounceOutRight').addClass('bounceInRight');
-    $(this).find('.caption').fadeIn();
-    
-
-}, function(){
-$(this).find('.myToggle').fadeOut();
-//$(this).find('.attr-icon').fadeOut();
-    $(this).find('.caption').removeClass(animIn).addClass(animOut);
- //$(this).find('.right').removeClass('bounceInRight').addClass('bounceOutRight');
-    $(this).find('.caption').fadeOut();
-});
-}
- function navClick(){
- 
-    $('.navbar-default .navbar-nav>li>a').click(function(){
-		$('.navbar-collapse').toggleClass('in');
-	});
-	
- }
- function valid(){
- $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
-}
